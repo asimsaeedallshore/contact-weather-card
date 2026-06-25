@@ -1,0 +1,7 @@
+{
+  "uid": "contact_weather_card_settings",
+  "type": "settings",
+  "config": {
+    "entrypoint": "/app/settings/SettingsPage.tsx"
+  }
+}

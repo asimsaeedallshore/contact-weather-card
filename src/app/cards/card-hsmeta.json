@@ -1,0 +1,13 @@
+{
+  "uid": "contact_weather_card_card",
+  "type": "card",
+  "config": {
+    "name": "Weather Card",
+    "description": "Displays weather information for the contact.",
+    "location": "crm.record.tab",
+    "entrypoint": "/app/cards/WeatherCard.tsx",
+    "objectTypes": [
+      "contacts"
+    ]
+  }
+}
