@@ -39,4 +39,4 @@ jobs:
           echo "HubSpot project structure found."
 
       - name: Upload HubSpot project
-        run: hs project upload --account="${{ secrets.HUBSPOT_ACCOUNT_ID }}"
+        run: hs project upload --account="$DEFAULT_ACCOUNT_ID" --use-env
