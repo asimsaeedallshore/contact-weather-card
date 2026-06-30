@@ -9,6 +9,7 @@ permissions:
 env:
   DEFAULT_ACCOUNT_ID: ${{ secrets.HUBSPOT_ACCOUNT_ID }}
   DEFAULT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+  DEFAULT_CLI_VERSION: "8.0.0"
 
 jobs:
   deploy:
@@ -18,25 +19,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install HubSpot CLI
-        run: npm install -g @hubspot/cli
-
-      - name: Show versions
-        run: |
-          node --version
-          npm --version
-          hs --version
-
       - name: Validate HubSpot project structure
         run: |
           test -f hsproject.json
           test -d src
           echo "HubSpot project structure found."
 
-      - name: Upload HubSpot project
-        run: hs project upload --account="$DEFAULT_ACCOUNT_ID" --use-env
+      - name: Upload to HubSpot
+        uses: HubSpot/hubspot-project-actions@v1.1.0
