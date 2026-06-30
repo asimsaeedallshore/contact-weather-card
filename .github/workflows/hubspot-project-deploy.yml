@@ -1,0 +1,42 @@
+name: HubSpot Project Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DEFAULT_ACCOUNT_ID: ${{ secrets.HUBSPOT_ACCOUNT_ID }}
+  DEFAULT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install HubSpot CLI
+        run: npm install -g @hubspot/cli
+
+      - name: Show versions
+        run: |
+          node --version
+          npm --version
+          hs --version
+
+      - name: Validate HubSpot project structure
+        run: |
+          test -f hsproject.json
+          test -d src
+          echo "HubSpot project structure found."
+
+      - name: Upload HubSpot project
+        run: hs project upload --account="${{ secrets.HUBSPOT_ACCOUNT_ID }}"
