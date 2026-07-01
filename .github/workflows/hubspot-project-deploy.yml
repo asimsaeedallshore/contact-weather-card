@@ -2,6 +2,31 @@ name: HubSpot Project Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      source:
+        description: Source trigger
+        required: false
+        default: electron-app
+      project:
+        description: HubSpot project name
+        required: false
+        default: contact-weather-card
+      target:
+        description: Target environment
+        required: false
+        default: Wind-Dev
+      selectedCount:
+        description: Number of selected components/files
+        required: false
+        default: "0"
+      project_directory:
+        description: HubSpot project directory
+        required: false
+        default: "."
+      hubspot_account_name:
+        description: HubSpot account name
+        required: false
+        default: "Bandwidth-Dev"
 
 permissions:
   contents: read
